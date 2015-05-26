@@ -28,6 +28,7 @@ NSString * const PINMemoryCachePrefix = @"com.pinterest.PINMemoryCache";
 @synthesize ageLimit = _ageLimit;
 @synthesize costLimit = _costLimit;
 @synthesize totalCost = _totalCost;
+@synthesize defaultItemCost = _defaultItemCost;
 @synthesize willAddObjectBlock = _willAddObjectBlock;
 @synthesize willRemoveObjectBlock = _willRemoveObjectBlock;
 @synthesize willRemoveAllObjectsBlock = _willRemoveAllObjectsBlock;
@@ -670,6 +671,22 @@ NSString * const PINMemoryCachePrefix = @"com.pinterest.PINMemoryCache";
 
     if (costLimit > 0)
         [self trimToCostLimitByDate:costLimit];
+}
+
+- (NSUInteger)defaultItemCost
+{
+    [self lock];
+        NSUInteger defaultItemCost = _defaultItemCost;
+    [self unlock];
+    
+    return defaultItemCost;
+}
+
+- (void)setDefaultItemCost:(NSUInteger)defaultItemCost
+{
+    [self lock];
+        _defaultItemCost = defaultItemCost;
+    [self unlock];
 }
 
 - (NSUInteger)totalCost

@@ -34,6 +34,11 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
 
 - (instancetype)initWithName:(NSString *)name rootPath:(NSString *)rootPath
 {
+    return [self initWithName:name rootPath:rootPath defaultItemCost:0];
+}
+
+- (instancetype)initWithName:(NSString *)name rootPath:(NSString *)rootPath defaultItemCost:(NSUInteger)defaultItemCost
+{
     if (!name)
         return nil;
     
@@ -46,6 +51,7 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
         _diskCache = [[PINDiskCache alloc] initWithName:_name rootPath:rootPath];
         _memoryCache = [[PINMemoryCache alloc] init];
     }
+    
     return self;
 }
 
@@ -291,6 +297,10 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
     }];
     
     return byteCount;
+}
+
+- (NSUInteger)defaultItemCost {
+    return [_memoryCache defaultItemCost];
 }
 
 - (id)objectForKey:(NSString *)key

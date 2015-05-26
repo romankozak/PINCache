@@ -59,6 +59,11 @@ typedef void (^PINMemoryCacheObjectBlock)(PINMemoryCache *cache, NSString *key, 
 @property (assign) NSUInteger costLimit;
 
 /**
+ The default item cost that gets applied to the item upon insertion using <setObject:forKey:block:>
+ */
+@property (assign) NSUInteger defaultItemCost;
+
+/**
  The maximum number of seconds an object is allowed to exist in the cache. Setting this to a value
  greater than `0.0` will start a recurring GCD timer with the same period that calls <trimToDate:>.
  Setting it back to `0.0` will stop the timer. Defaults to `0.0`.

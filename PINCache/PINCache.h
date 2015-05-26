@@ -61,6 +61,11 @@ typedef void (^PINCacheObjectBlock)(PINCache *cache, NSString *key, id __nullabl
 @property (readonly) NSUInteger diskByteCount;
 
 /**
+ Synchronously retrieves the default cost applied to items that gets inserted into the <memoryCache>.
+ */
+@property (readonly) NSUInteger defaultItemCost;
+
+/**
  The underlying disk cache, see <PINDiskCache> for additional configuration and trimming options.
  */
 @property (readonly) PINDiskCache *diskCache;
@@ -99,7 +104,32 @@ typedef void (^PINCacheObjectBlock)(PINCache *cache, NSString *key, id __nullabl
  @param rootPath The path of the cache on disk.
  @result A new cache with the specified name.
  */
-- (instancetype)initWithName:(NSString *)name rootPath:(NSString *)rootPath NS_DESIGNATED_INITIALIZER;
+- (instancetype)initWithName:(NSString *)name rootPath:(NSString *)rootPath;
+
+/**
+ Multiple instances with the same name are allowed and can safely access
+ the same data on disk thanks to the magic of seriality. Also used to create the <diskCache> and has
+ the default item cost for memory cache that is different from 0.
+ 
+ @see name
+ @param name The name of the cache.
+ @param defaultItemCost Cost of item inserted via <setObject:forKey:block:>
+ @result A new cache with the specified name.
+ */
+- (instancetype)initWithName:(NSString *)name defaultItemCost:(NSUInteger)defaultItemCost;
+
+/**
+ Multiple instances with the same name are allowed and can safely access
+ the same data on disk thanks to the magic of seriality. Also used to create the <diskCache> and has 
+ the default item cost for memory cache that is different from 0.
+ 
+ @see name
+ @param name The name of the cache.
+ @param rootPath The path of the cache on disk.
+ @param defaultItemCost Cost of item inserted via <setObject:forKey:block:>
+ @result A new cache with the specified name.
+ */
+- (instancetype)initWithName:(NSString *)name rootPath:(NSString *)rootPath defaultItemCost:(NSUInteger)defaultItemCost NS_DESIGNATED_INITIALIZER;
 
 #pragma mark -
 /// @name Asynchronous Methods

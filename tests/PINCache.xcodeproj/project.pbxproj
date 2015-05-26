@@ -355,7 +355,7 @@
 			isa = PBXProject;
 			attributes = {
 				CLASSPREFIX = TM;
-				LastTestingUpgradeCheck = 0620;
+				LastTestingUpgradeCheck = 0630;
 				LastUpgradeCheck = 0500;
 				ORGANIZATIONNAME = Tumblr;
 				TargetAttributes = {
