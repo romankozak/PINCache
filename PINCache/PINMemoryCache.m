@@ -286,7 +286,7 @@ NSString * const PINMemoryCachePrefix = @"com.pinterest.PINMemoryCache";
 
 - (void)setObject:(id)object forKey:(NSString *)key block:(PINMemoryCacheObjectBlock)block
 {
-    [self setObject:object forKey:key withCost:0 block:block];
+    [self setObject:object forKey:key withCost:self.defaultItemCost block:block];
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost block:(PINMemoryCacheObjectBlock)block
@@ -404,7 +404,7 @@ NSString * const PINMemoryCachePrefix = @"com.pinterest.PINMemoryCache";
 
 - (void)setObject:(id)object forKey:(NSString *)key
 {
-    [self setObject:object forKey:key withCost:0];
+    [self setObject:object forKey:key withCost:self.defaultItemCost];
 }
 
 - (void)setObject:(id)object forKey:(NSString *)key withCost:(NSUInteger)cost
