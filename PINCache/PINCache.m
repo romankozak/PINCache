@@ -7,6 +7,8 @@
 NSString * const PINCachePrefix = @"com.pinterest.PINCache";
 NSString * const PINCacheSharedName = @"PINCacheShared";
 
+#define CACHE_PATH [NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]
+
 @interface PINCache ()
 #if OS_OBJECT_USE_OBJC
 @property (strong, nonatomic) dispatch_queue_t concurrentQueue;
@@ -29,12 +31,16 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
 
 - (instancetype)initWithName:(NSString *)name
 {
-    return [self initWithName:name rootPath:[NSSearchPathForDirectoriesInDomains(NSCachesDirectory, NSUserDomainMask, YES) firstObject]];
+    return [self initWithName:name rootPath:CACHE_PATH];
 }
 
 - (instancetype)initWithName:(NSString *)name rootPath:(NSString *)rootPath
 {
     return [self initWithName:name rootPath:rootPath defaultItemCost:0];
+}
+
+- (instancetype)initWithName:(NSString *)name defaultItemCost:(NSUInteger)defaultItemCost {
+    return [self initWithName:name rootPath:CACHE_PATH defaultItemCost:defaultItemCost];
 }
 
 - (instancetype)initWithName:(NSString *)name rootPath:(NSString *)rootPath defaultItemCost:(NSUInteger)defaultItemCost
