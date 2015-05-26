@@ -56,6 +56,7 @@ NSString * const PINCacheSharedName = @"PINCacheShared";
         
         _diskCache = [[PINDiskCache alloc] initWithName:_name rootPath:rootPath];
         _memoryCache = [[PINMemoryCache alloc] init];
+        _memoryCache.defaultItemCost = defaultItemCost;
     }
     
     return self;
